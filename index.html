@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form Prototype</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+
+      <link rel="stylesheet" href="css/style.css">
+
+      <style>
+      .slidecontainer {
+          width: 100%;
+      }
+
+      .slider {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 10px;
+          border-radius: 5px;
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+      }
+
+      .slider:hover {
+          opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 32px;
+          height: 32px;
+          border: 0;
+          cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+          width: 32px;
+          height: 32px;
+          border: 0;
+          cursor: pointer;
+      }
+      </style>
+      <style>
+      .slider::-webkit-slider-thumb {
+          background: url('small/smile3.png');
+      }
+
+      .slider::-moz-range-thumb {
+          background: url('small/smile3.png');
+      }
+      </style>
+</head>
+
+<body>
+
+  <!-- multistep form -->
+<form id="msform">
+  <!-- progressbar -->
+  <ul id="progressbar">
+    <li class="active">Start</li>
+    <li>Account Setup</li>
+    <li>More about you</li>
+    <li>Personal Details</li>
+    <li>Rating</li>
+    <li>Finish</li>
+  </ul>
+  <!-- fieldsets -->
+  <fieldset>
+    <h2 class="fs-title">Sign up</h2>
+    <h3 class="fs-subtitle">Thank you for trying our application! Hope you have a great experience! Make sure you have your sound turned on (you should hear audio now).</h3>
+    <input type="button" name="next" class="next action-button" value="Next" onclick="startTimer()" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Create your account</h2>
+    <h3 class="fs-subtitle">Relax, we won't save anything!</h3>
+    <input type="text" name="email" placeholder="Email" maxlength="255"/>
+    <input type="password" name="password" placeholder="Password" maxlength="255"/>
+    <input type="password" name="confirmPassword" placeholder="Confirm Password" maxlength="255"/>
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">More about you</h2>
+    <h3 class="fs-subtitle">You are awesome either way!</h3>
+    <textarea name="activityLike" placeholder="Please tell us about some activity you like to do (first thing that comes to mind)" rows="4" cols="50"></textarea>
+    <textarea name="activityDislike" placeholder="Please tell us about some activity you don't like to do (first thing that comes to mind)" rows="4" cols="50"></textarea>
+    <textarea name="eatLike" placeholder="Please tell us something you like to eat (first thing that comes to mind)" rows="4" cols="50"></textarea>
+    <textarea name="eatDislike" placeholder="Please tell us something you don't like to eat (first thing that comes to mind)" rows="4" cols="50"></textarea>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Personal Details</h2>
+    <h3 class="fs-subtitle">Whatever you fill in, you'll still be an amazing person!</h3>
+    <input type="text" name="fname" placeholder="First Name" />
+    <input type="text" name="lname" placeholder="Last Name" />
+    <input type="text" name="phone" placeholder="Phone" />
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Rating</h2>
+    <h3 class="fs-subtitle">Please rate this signup process somewhere between 1-10</h3>
+    <div class="slidecontainer" style="margin-bottom: 10px">
+      <input type="range" min="1" max="10" value="6" class="slider" id="myRange" name="ratingNum">
+      <p>Value: <span id="demo3"></span></p>
+    </div>
+    <textarea name="ratingText" placeholder="Please explain why you gave this rating" rows="4" cols="50"></textarea>
+    <textarea name="ratingMusic" placeholder="What do you think of the audio playing?" rows="4" cols="50"></textarea>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" onclick="finishForm()"/>
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Thank you!</h2>
+    <h3 class="fs-subtitle">Thanks for helping with this experiment! You are awesome!</h3>
+    Completing this took you <p id="demo" style="display: none"></p><p id="demo2"></p>.
+    <input type="text" id="totalTime" name="totalTime" style="display: none"></p>
+  </fieldset>
+</form>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+
+<embed name="GoodEnough" src="MarconiUnionWeightless.mp3" loop="true" hidden="true" autostart="true">
+
+    <script  src="js/index.js"></script>
+
+<script>
+function finishForm() {
+  document.getElementById('demo2').innerHTML = document.getElementById('demo').innerHTML;
+  document.getElementById('totalTime').value = document.getElementById('demo').innerHTML;
+
+  var sendData = $( document.getElementById("msform") ).serialize();
+$.ajax({
+type: "POST",
+url: "get_response.php",
+data: sendData,
+success: function(data){
+console.log("Finish");
+}
+
+});
+}
+
+function startTimer(){
+// Set the date we're counting down to
+var countDownDate = new Date().getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = -Math.floor(distance / (1000 * 60 * 60 * 24))-1;
+    var hours = -Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))-1;
+    var minutes = -Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))-1;
+    var seconds = -Math.floor((distance % (1000 * 60)) / 1000)-1;
+
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+    // If the count down is over, write some text
+    //if (distance < 0) {
+    //    clearInterval(x);
+    //    document.getElementById("demo").innerHTML = "EXPIRED";
+    //}
+}, 1000);
+  return true;
+}
+</script>
+
+
+<div style="display:none">
+<img src="small/smile1.png">
+<img src="small/smile2.png">
+<img src="small/smile3.png">
+<img src="small/smile4.png">
+<img src="small/smile5.png"></div>
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo3");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  var someVal = this.value;
+  output.innerHTML = someVal;
+  switch(parseInt(someVal)){
+    case 1:
+    case 2: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile1.png\")"; break;
+    case 3:
+    case 4: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile2.png\")"; break;
+    case 5:
+    case 6: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile3.png\")"; break;
+    case 7:
+    case 8: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile4.png\")"; break;
+    case 9:
+    case 10: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile5.png\")"; break;
+  }
+}
+</script>
+
+</body>
+
+</html>
