@@ -120,14 +120,7 @@ function ArrayShuffle(arr){
 ArrayShuffle(heads);
 var Grossini = cc.Class.extend({
     ctor:function(pos){
-        if(Grossini.num<10)
-        {
-            var ran = heads[Grossini.num-1];
-        }
-        else{
-            var ran = (0|(Math.random()*heads.length));
-        }
-        this.head = new CPSprite('res/head'+ran+'.png',cc.pAdd(pos, cc.p(0, 35.5)), 15, 1.4,0.2);
+        this.head = new CPSprite('res/head0.png',cc.pAdd(pos, cc.p(0, 35.5)), 15, 1.4,0.2);
         this.leftArm = new CPSprite('res/leftarm.png', cc.pAdd(pos,cc.p(-29.87,11)), 2, 1.4, 0.2);
         this.rightArm = new CPSprite('res/rightarm.png', cc.pAdd(pos,cc.p(29.87,11)), 2,1.4,0.2);
         this.body = new CPSprite('res/body.png', pos, 12, 1, 0.5);

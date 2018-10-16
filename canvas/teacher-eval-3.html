@@ -238,191 +238,298 @@
 
  </div>
 
- <form id="msform">
- <div id="prequestionnaire">
- What is your email address?
- <input name="email" id="email" style="
-     width: 100%;
-     bottom: 0;
-     resize: none;
-     overflow-y: auto;
-     box-shadow: none;
-     box-sizing: border-box;
-     border: 1px;border-style: solid;border-color: #d8e0e6;-webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-     border-radius: 5px;" placeholder="Please enter your email address.">
-     <br><br>What teacher are you reviewing?
-     <input name="teacher" id="teacher" style="
-         width: 100%;
-         bottom: 0;
-         resize: none;
-         overflow-y: auto;
-         box-shadow: none;
-         box-sizing: border-box;
-         border: 1px;border-style: solid;border-color: #d8e0e6;-webkit-border-radius: 5px;
-         -moz-border-radius: 5px;
-         border-radius: 5px;" placeholder="Please enter the full name of the teacher.">
-     <br><br>How satisfied are you with the service you receive from the UvA?
-     <div class="slidecontainer2" style="margin-bottom: 10px">
-       <input type="range" min="1" max="10" value="6" class="slider2" id="myRange2" name="satisfaction_service">
-     </div>
-
-     <br>How happy are you with your choice for the UvA?
-     <div class="slidecontainer3" style="margin-bottom: 10px">
-       <input type="range" min="1" max="10" value="6" class="slider3" id="myRange3" name="happy_choice">
-     </div>
-
-     <button style="background: #bc0031;
-     color: #ffffff;
-     border: 1px solid;
-     border-color: #a0002a;
-     border-radius: 3px;
-     transition: background-color 0.2s ease-in-out;
-     display: inline-block;
-     position: relative;
-     padding: 8px 14px;
-     margin-bottom: 0;
-     font-size: 16px;
-     font-size: 1rem;
-     line-height: 20px;
-     text-align: center;
-     vertical-align: middle;
-     cursor: pointer;
-     text-decoration: none;
-     overflow: hidden;
-     text-shadow: none;
-     float: right;
- " type="button" class="btn btn-primary btn-upload" data-reactid=".0.2.1.2.1.1" onclick="$('#prequestionnaire').css('display', 'none');$('#DashboardCard_Container').css('display', 'block');">Start the experiment</button>
- </div>
- <script>
- var slider2 = document.getElementById("myRange2");
-
- slider2.oninput = function() {
-   var someVal = this.value;
-   switch(parseInt(someVal)){
-     case 1:
-     case 2: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile1.png\")"; break;
-     case 3:
-     case 4: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile2.png\")"; break;
-     case 5:
-     case 6: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile3.png\")"; break;
-     case 7:
-     case 8: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile4.png\")"; break;
-     case 9:
-     case 10: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile5.png\")"; break;
-   }
- }
-
- var slider3 = document.getElementById("myRange3");
-
- slider3.oninput = function() {
-   var someVal = this.value;
-   switch(parseInt(someVal)){
-     case 1:
-     case 2: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile1.png\")"; break;
-     case 3:
-     case 4: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile2.png\")"; break;
-     case 5:
-     case 6: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile3.png\")"; break;
-     case 7:
-     case 8: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile4.png\")"; break;
-     case 9:
-     case 10: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile5.png\")"; break;
-   }
- }
- </script>
- <div style="display:none">
- <img src="small/smile1.png">
- <img src="small/smile2.png">
- <img src="small/smile3.png">
- <img src="small/smile4.png">
- <img src="small/smile5.png"></div>
- <div id=DashboardCard_Container style=display:none;>Please enter the <b>anonymous</b> evaluation for your teacher. The evaluation will be directly available to the teacher.<br>
-
- <div style="margin:0 auto; text-align: center; font-size: 0; width:800px;  border:1px dotted #fff">
-     <canvas id="gameCanvas" width="800" height="400"></canvas>
- </div>
- <style>
-     a:link, a:visited{
-         color:#00c0ff;
-         text-decoration: none;
-     }
-     a:hover, a:active{
-         text-decoration: underline;
-     }
- /* General styles */
-
-
-.rate-us {
-    text-align: center;
+<style>@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+/* fontawesome */
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
 }
 
-/*Input styles*/
+.container{
+  border-radius:10px;
+  height:90px;
+  margin:50px auto;
+  overflow: hidden;
+  position: relative;
+  width:800px;
+}
+
+.up{
+  background:rgba(0,255,0,0.2);
+}
+
+.down{
+  background:rgba(255,0,0,0.2);
+}
+
+.up,.down{
+  border-radius:10px;
+
+  color:rgba(255,255,255,0.5);
+  float:left;
+  font-size:50px;
+  height:100%;
+  line-height:90px;
+  text-align:center;
+  transition:all .2s linear;
+  width:90px;
+}
+
+.down{margin-left:60px;}
+
+.check{
+  background:#f65330;
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+  height:100%;
+  line-height:90px;
+  padding-left:20px;
+  transition:all .2s linear;
+  width:100%;
+}
+
+.blabla{
+  content:'Thanks for your opinion!';
+  font:35px/90px 'Montserrat';
+  font-style:italic;
+  height:100%;
+  padding-left:20px;
+}
+
+.up:hover{
+  background:#2ecc71;
+  color:#fff;
+  cursor:pointer;
+}
+
+.down:hover{
+  background:#e74c3c;
+  color:#fff;
+  cursor:pointer;
+}
+
+.ok{
+  background: #30c3bb;
+  right: -20px;
+}
+.scaleDown{
+  transform:scale(0);
+}
+
+</style>
+<script>
+var voted = false;
+$(function() {
+$('.check').click(function(){
+  if(voted)reset();
+});
+
+$('.up').click(function(){
+  $(this).addClass('scaleDown');
+  $('.down').addClass('scaleDown');
+  $('.check').addClass('ok');
+  $('.check').css("display","block");
+  $('#rating').val("Like");
+  voted = true;
+});
+
+$('.down').click(function(){
+  $(this).addClass('scaleDown');
+  $('.up').addClass('scaleDown');
+  $('.check').addClass('ok');
+  $('.check').css("display","block");
+  $('#rating').val("Dislike");
+  voted = true;
+});
+
+function reset(){
+    $('.scaleDown').removeClass('scaleDown');
+    $('.check').css("display","none");
+    voted = false;
+}
+});
+</script>
+
+<form id="msform">
+<div id="prequestionnaire">
+What is your email address?
+<input name="email" id="email" style="
+    width: 100%;
+    bottom: 0;
+    resize: none;
+    overflow-y: auto;
+    box-shadow: none;
+    box-sizing: border-box;
+    border: 1px;border-style: solid;border-color: #d8e0e6;-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;" placeholder="Please enter your email address.">
+    <br><br>What teacher are you reviewing?
+    <input name="teacher" id="teacher" style="
+        width: 100%;
+        bottom: 0;
+        resize: none;
+        overflow-y: auto;
+        box-shadow: none;
+        box-sizing: border-box;
+        border: 1px;border-style: solid;border-color: #d8e0e6;-webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;" placeholder="Please enter the full name of the teacher.">
+    <br><br>How satisfied are you with the service you receive from the UvA?
+    <div class="slidecontainer2" style="margin-bottom: 10px">
+      <input type="range" min="1" max="10" value="6" class="slider2" id="myRange2" name="satisfaction_service">
+    </div>
+
+    <br>How happy are you with your choice for the UvA?
+    <div class="slidecontainer3" style="margin-bottom: 10px">
+      <input type="range" min="1" max="10" value="6" class="slider3" id="myRange3" name="happy_choice">
+    </div>
+
+    <button style="background: #bc0031;
+    color: #ffffff;
+    border: 1px solid;
+    border-color: #a0002a;
+    border-radius: 3px;
+    transition: background-color 0.2s ease-in-out;
+    display: inline-block;
+    position: relative;
+    padding: 8px 14px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+    text-shadow: none;
+    float: right;
+" type="button" class="btn btn-primary btn-upload" data-reactid=".0.2.1.2.1.1" onclick="$('#prequestionnaire').css('display', 'none');$('#DashboardCard_Container').css('display', 'block');">Start the experiment</button>
+</div>
+<script>
+var slider2 = document.getElementById("myRange2");
+
+slider2.oninput = function() {
+  var someVal = this.value;
+  switch(parseInt(someVal)){
+    case 1:
+    case 2: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile1.png\")"; break;
+    case 3:
+    case 4: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile2.png\")"; break;
+    case 5:
+    case 6: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile3.png\")"; break;
+    case 7:
+    case 8: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile4.png\")"; break;
+    case 9:
+    case 10: document.styleSheets[1].cssRules[0].style.background="url(\"small/smile5.png\")"; break;
+  }
+}
+
+var slider3 = document.getElementById("myRange3");
+
+slider3.oninput = function() {
+  var someVal = this.value;
+  switch(parseInt(someVal)){
+    case 1:
+    case 2: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile1.png\")"; break;
+    case 3:
+    case 4: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile2.png\")"; break;
+    case 5:
+    case 6: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile3.png\")"; break;
+    case 7:
+    case 8: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile4.png\")"; break;
+    case 9:
+    case 10: document.styleSheets[3].cssRules[0].style.background="url(\"small/smile5.png\")"; break;
+  }
+}
+</script>
+<div style="display:none">
+<img src="small/smile1.png">
+<img src="small/smile2.png">
+<img src="small/smile3.png">
+<img src="small/smile4.png">
+<img src="small/smile5.png"></div>
+<div id=DashboardCard_Container style=display:none;>Please enter the <b>anonymous</b> evaluation for your teacher. The evaluation will be directly available to the teacher.<br>
+<style>
 input[type=radio] {
 display:none;
 }
 
 .green + .green-label
 {
-background: url("res/heart_grey.png") no-repeat; /*Please don't copy or reproduce these images */
+background: url("https://www.ariellafreinders.co.uk/images/codepen/green-01.png") no-repeat; /*Please don't copy or reproduce these images */
 background-size: cover;
-height: 50px;
-width: 50px;
+height: 200px;
+width: 200px;
 display:inline-block;
 padding: 0 0 0 0px;
 }
 
 .green:checked + .green-label
 {
-background: url("res/heart.png") no-repeat;
+background: url("https://www.ariellafreinders.co.uk/images/codepen/green.png") no-repeat;
 /*Please don't copy or reproduce these images */
 background-size: cover;
-height: 50px;
-width: 50px;
+height: 200px;
+width: 200px;
 display:inline-block;
 padding: 0 0 0 0px;
 }
 
 .red + .red-label
 {
-background: url("res/ball_grey.png") no-repeat;
+background: url("https://www.ariellafreinders.co.uk/images/codepen/red-01.png") no-repeat;
 /*Please don't copy or reproduce these images */
 background-size: cover;
-height: 50px;
-width: 50px;
+height: 200px;
+width: 200px;
 display:inline-block;
 padding: 0 0 0 0px;
 }
 
 .red:checked + .red-label
 {
-background: url("res/ball.png") no-repeat;
+background: url("https://www.ariellafreinders.co.uk/images/codepen/red.png") no-repeat;
 /*Please don't copy or reproduce these images */
 background-size: cover;
-height: 50px;
-width: 50px;
+height: 200px;
+width: 200px;
+display:inline-block;
+padding: 0 0 0 0px;
+}
+
+.yellow + .yellow-label
+{
+background: url("https://www.ariellafreinders.co.uk/images/codepen/yellow-01.png") no-repeat;
+/*Please don't copy or reproduce these images */
+background-size: cover;
+height: 200px;
+width: 200px;
+display:inline-block;
+padding: 0 0 0 0px;
+}
+
+.yellow:checked + .yellow-label
+{
+background: url("https://www.ariellafreinders.co.uk/images/codepen/yellow.png") no-repeat;
+/*Please don't copy or reproduce these images */
+background-size: cover;
+height: 200px;
+width: 200px;
 display:inline-block;
 padding: 0 0 0 0px;
 }
 </style>
- <script>var tool="";
-var balls = 0;
-var hearts = 0;
-var totals = 0;
- </script>
- <div class="rate-us">
- <input onclick="$('.imageradiobutton').not($(this)).prop('checked', false); tool = 'heart';" type='radio' value='Unhappy' class="imageradiobutton green" id="question1b"/><label for="question1b" class="green-label"></label>
+<script>
+</script>
+<div class="rate-us">
+<input type='radio' onclick='$(".imageradiobutton").not($(this)).prop("checked", false); $("#rating").val("Unhappy");' value='Unhappy' class="imageradiobutton red" id="question1b"/><label for="question1b" class="red-label"></label>
 
- <input onclick="$('.imageradiobutton').not($(this)).prop('checked', false); tool = 'anvil';" type='radio' value='Content' class="imageradiobutton red" id="question2b"/><label for="question2b" class="red-label"></label>
- <br>Rating points spent: <div id="totals" style="
-    display: inline-block;
-">0</div>/10, Current rating: <div id="totals2" style="
-    display: inline-block;
-">0</div>
+<input type='radio' onclick='$(".imageradiobutton").not($(this)).prop("checked", false); $("#rating").val("Content");' value='Content' class="imageradiobutton yellow" id="question2b"/><label for="question2b" class="yellow-label"></label>
 
- </div>
- <script src="box2d2.2.1/box2d.js"></script>
- <script src="cocos2d.js"></script>
+<input type='radio' onclick='$(".imageradiobutton").not($(this)).prop("checked", false); $("#rating").val("Happy");' value='Happy' class="imageradiobutton green" id="question3b"/><label for="question3b" class="green-label"></label>
+</div>
   <input type="text" style="display: none" name="rating" id="rating"><input type="text" style="display: none" name="duration" id="duration">
 Please tell why you like/dislike the teacher for this course:
 <textarea name="description" id="description" style="    min-height: 200px;
@@ -463,7 +570,7 @@ function finishForm() {
   var sendData = $( document.getElementById("msform") ).serialize();
 $.ajax({
 type: "POST",
-url: "../response.php",
+url: "response.php",
 data: sendData,
 success: function(data){
 console.log(data);

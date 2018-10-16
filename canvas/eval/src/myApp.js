@@ -171,14 +171,7 @@ function ArrayShuffle(arr){
 ArrayShuffle(heads);
 var Grossini = cc.Class.extend({
     ctor:function(){
-        if(Grossini.num<10)
-        {
-            var ran = heads[Grossini.num-1];
-        }
-        else{
-            var ran = (0|(Math.random()*heads.length));
-        }
-        this.head = cc.Sprite.create('res/head'+ran+'.png');
+        this.head = cc.Sprite.create('res/head0.png');
         this.leftArm = cc.Sprite.create('res/leftarm.png');
         this.rightArm = cc.Sprite.create('res/rightarm.png');
         this.body = cc.Sprite.create('res/body.png');
